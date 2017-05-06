@@ -5,12 +5,17 @@
  */
 package org.store.miri.people.payroll;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
  * @author jscruz
  */
-public interface EmployeeRepository extends CrudRepository<Employee, Long>{
-    
+//public interface EmployeeRepository extends CrudRepository<Employee, Long>{
+//    
+//}
+
+
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+
 }

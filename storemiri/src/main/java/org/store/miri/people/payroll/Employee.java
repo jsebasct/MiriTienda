@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import lombok.Data;
 
 /**
- *
+ * Track employee information
  * @author jscruz
  */
 @Data
