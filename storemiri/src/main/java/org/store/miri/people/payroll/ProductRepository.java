@@ -5,18 +5,13 @@
  */
 package org.store.miri.people.payroll;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.data.repository.CrudRepository;
+import org.store.miri.people.payroll.Product;
 
 /**
  *
  * @author jscruz
  */
-@Controller
-public class HomeController {
+public interface ProductRepository extends CrudRepository<Product, Long> {
     
-    @RequestMapping(value="/")
-    public String index() {
-        return "index";
-    }
 }

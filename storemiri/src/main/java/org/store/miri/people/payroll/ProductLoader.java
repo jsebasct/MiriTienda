@@ -14,20 +14,18 @@ import org.springframework.stereotype.Component;
  * @author jscruz
  */
 @Component
-public class DatabaseLoader implements CommandLineRunner {
-
-    private final EmployeeRepository repository;
+public class ProductLoader implements CommandLineRunner {
+    
+    private final ProductRepository repository;
     
     @Autowired
-    public DatabaseLoader(EmployeeRepository repository) {
+    public ProductLoader(ProductRepository repository) {
         this.repository = repository;
     }
     
     @Override
-    public void run(String... strings) throws Exception {
-        this.repository.save(new Employee("Frodo", "Baggins","ring bearer"));
-        
-        
+    public void run(String... params) throws Exception{
+        this.repository.save(new Product("Cereales CorniFlex", 24L, "OLXCE34"));
+        this.repository.save(new Product("Zucaritas kullogs", 28L, "OPXCE38"));
     }
-    
 }
