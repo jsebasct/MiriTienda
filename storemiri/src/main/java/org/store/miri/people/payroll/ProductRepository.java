@@ -6,12 +6,14 @@
 package org.store.miri.people.payroll;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.store.miri.people.payroll.Product;
 
 /**
  *
  * @author jscruz
  */
+@RepositoryRestResource(collectionResourceRel="prod", path="products")
 public interface ProductRepository extends CrudRepository<Product, Long> {
     
 }

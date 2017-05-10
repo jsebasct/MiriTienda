@@ -8,7 +8,7 @@ class ShoppingList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {countries: []};
+    this.state = {countries: [], products: []};
   }
 
   componentDidMount() {
@@ -16,14 +16,17 @@ class ShoppingList extends React.Component {
 
     URLUtils.getJSON('http://localhost:8080/api/products')
     .then(function(response) {
-      console.log(response);
+      console.log("Response Productos:", response);
+	  
+	  that.setState({products: response._embedded.prod});
     }).catch(function(error) {
       console.log(error);
     });
 
+	/*
     URLUtils.getJSON('http://services.groupkt.com/country/get/all')
     .then(function(response) {
-      console.log(response.RestResponse.result.length);
+      console.log("Paises", response.RestResponse.result.length);
       console.log(response);
       that.setState({countries:response.RestResponse.result});
 
@@ -32,9 +35,24 @@ class ShoppingList extends React.Component {
       console.log(err);
       that.setState({countries:[]});
     });
+	*/
   }
+  
+  renderProductRows() {
+    var rows = this.state.products.map(function(element) {
+      return (
+            <tr key={element.alpha3_code}>
+              <td>{element.name}</td>
+              <td>{element.price}</td>
+              <td>{element.barCode}</td>
+            </tr>
+          );
+    });
 
-  renderRow() {
+    return rows;
+  }
+  
+  renderCountryRows() {
     var rows = this.state.countries.map(function(element) {
       return (
             <tr key={element.alpha3_code}>
@@ -51,7 +69,20 @@ class ShoppingList extends React.Component {
   render() {
     return (
       <div className="shopping-list">
-        <h1>Product List</h1>
+		<h1>Product List</h1>
+        <table>
+          <thead>
+            <tr>
+              <td>Nombre</td>
+              <td>Codigo</td>
+              <td>Precio</td>
+            </tr>
+          </thead>
+          <tbody>
+                {this.renderProductRows()}
+          </tbody>
+        </table>
+        <h1>Country List</h1>
         <table>
           <thead>
             <tr>
@@ -61,7 +92,7 @@ class ShoppingList extends React.Component {
             </tr>
           </thead>
           <tbody>
-                {this.renderRow()}
+                {this.renderCountryRows()}
           </tbody>
         </table>
       </div>
