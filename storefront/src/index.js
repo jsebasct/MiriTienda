@@ -23,6 +23,11 @@ import './index.css';
 
 class ShoppingList extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {countries: []};
+  }
+
   /**
    * XHR wrapped in a promise.
    * @param  {String} url - The URL to fetch.
@@ -46,15 +51,40 @@ class ShoppingList extends React.Component {
   }
 
   componentDidMount() {
+    var that = this;
+
     this.getJSON('http://services.groupkt.com/country/get/all')
     .then(function(response) {
       console.log(response.RestResponse.result.length);
       console.log(response);
+      that.setState({countries:response.RestResponse.result});
 
     }).catch(function(err) {
       // Error :(
       console.log(err);
+      that.setState({countries:[]});
     });
+  }
+
+  renderRow() {
+
+    var rows = this.state.countries.map(function(element) {
+      return (
+            <tr key={element.alpha3_code}>
+              <td>{element.name}</td>
+              <td>{element.alpha2_code}</td>
+              <td>{element.alpha3_code}</td>
+            </tr>
+          );
+    });
+
+    // return (<tr>
+    //   <td></td>
+    //   <td></td>
+    //   <td></td>
+    // </tr>);
+
+    return rows;
   }
 
   render() {
@@ -62,17 +92,16 @@ class ShoppingList extends React.Component {
       <div className="shopping-list">
         <h1>Product List</h1>
         <table>
+          <thead>
+            <tr>
+              <td>Country Name</td>
+              <td>Alpha 2</td>
+              <td>Alpha 3</td>
+            </tr>
+          </thead>
           <tbody>
-            <tr>
-              <td>Instagram</td>
-            </tr>
-            <tr>
-              <td>WhatsApp</td>
-            </tr>
-            <tr>
-              <td>Oculus</td>
-            </tr>
-            </tbody>
+                {this.renderRow()}
+          </tbody>
         </table>
       </div>
     );
