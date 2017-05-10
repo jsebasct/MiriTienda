@@ -14,6 +14,13 @@ class ShoppingList extends React.Component {
   componentDidMount() {
     var that = this;
 
+    URLUtils.getJSON('http://localhost:8080/api/products')
+    .then(function(response) {
+      console.log(response);
+    }).catch(function(error) {
+      console.log(error);
+    });
+
     URLUtils.getJSON('http://services.groupkt.com/country/get/all')
     .then(function(response) {
       console.log(response.RestResponse.result.length);
@@ -49,8 +56,8 @@ class ShoppingList extends React.Component {
           <thead>
             <tr>
               <td>Country Name</td>
-              <td>Alpha 2</td>
-              <td>Alpha 3</td>
+              <td>Code Alpha 2</td>
+              <td>Code Alpha 3</td>
             </tr>
           </thead>
           <tbody>
