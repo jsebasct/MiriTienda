@@ -27,7 +27,6 @@ export default class ProductTable extends React.Component {
                   <div className="cell">Nombre</div>
                   <div className="cell">Codigo</div>
                   <div className="cell">Precio</div>
-
               </div>
 
               {this.renderProductRows()}

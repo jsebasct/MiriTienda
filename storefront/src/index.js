@@ -25,8 +25,6 @@ class App extends React.Component {
     });
   }
 
-
-        //<h1>Product List</h1>
   render() {
     return (
       <div>
